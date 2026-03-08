@@ -2,7 +2,6 @@
   "name": "web",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,7 +10,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
     "@types/node": "^25.3.5",
