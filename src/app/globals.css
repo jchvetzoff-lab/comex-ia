@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0f;
+  --bg2: #12121a;
+  --bg3: #1a1a28;
+  --border: #2a2a3a;
+  --text: #e0e0e0;
+  --text2: #888;
+  --accent: #e94e1b;
+  --accent2: #ff8c42;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* Agent Cards */
+.agent-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 24px; }
+@media (max-width: 900px) { .agent-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 500px) { .agent-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.agent-card {
+  background: var(--bg2);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+.agent-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(233,78,27,0.12); }
+.agent-card.active { border-color: var(--accent); background: linear-gradient(135deg, #1a1020 0%, #16213e 100%); }
+.agent-card .emoji { font-size: 36px; margin-bottom: 8px; }
+.agent-card .name { font-size: 13px; font-weight: 700; }
+.agent-card .role { font-size: 10px; color: var(--text2); margin-top: 2px; }
+.agent-card .dot {
+  position: absolute; top: 10px; right: 10px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #3fb950; box-shadow: 0 0 6px #3fb950;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #0f0f1a 0%, #16213e 100%);
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+.header h1 {
+  font-size: 42px; font-weight: 800;
+  background: linear-gradient(135deg, #e94e1b, #ff8c42);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.header p { color: var(--text2); margin-top: 6px; font-size: 15px; }
+
+/* Chat */
+.chat-container {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.chat-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg3);
+}
+.chat-header .emoji { font-size: 32px; }
+.chat-header .info .name { font-size: 16px; font-weight: 700; }
+.chat-header .info .role { font-size: 12px; color: var(--text2); }
+.chat-header .status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: #3fb950; }
+.chat-header .status .dot { width: 8px; height: 8px; border-radius: 50%; background: #3fb950; box-shadow: 0 0 6px #3fb950; }
+
+.messages { padding: 20px; max-height: 55vh; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; min-height: 200px; }
+
+.msg {
+  max-width: 85%; padding: 14px 18px;
+  border-radius: 16px; font-size: 14px; line-height: 1.7;
+  white-space: pre-wrap;
+}
+.msg.user { background: #1e3a5f; align-self: flex-end; border-bottom-right-radius: 4px; }
+.msg.agent { background: var(--bg3); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.agent .agent-label { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+
+.msg-input-row {
+  display: flex; gap: 10px; padding: 16px 20px;
+  border-top: 1px solid var(--border); background: var(--bg3);
+}
+.msg-input-row textarea {
+  flex: 1; background: var(--bg); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px 16px; color: var(--text);
+  font-family: inherit; font-size: 14px; resize: none; outline: none;
+  min-height: 48px; max-height: 120px;
+}
+.msg-input-row textarea:focus { border-color: var(--accent); }
+.msg-input-row button {
+  background: linear-gradient(135deg, #e94e1b, #ff8c42);
+  border: none; border-radius: 12px; padding: 0 24px;
+  color: #fff; font-weight: 700; font-size: 14px; cursor: pointer;
+  transition: opacity 0.2s;
+}
+.msg-input-row button:hover { opacity: 0.9; }
+.msg-input-row button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; margin-bottom: 24px; background: var(--bg2); border-radius: 12px; padding: 4px; }
+.tab {
+  flex: 1; padding: 10px; text-align: center; border-radius: 10px;
+  cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text2);
+  transition: all 0.2s;
+}
+.tab:hover { color: var(--text); }
+.tab.active { background: var(--bg3); color: var(--accent); }
+
+/* Skills */
+.skills { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; justify-content: center; }
+.skill { background: var(--bg); padding: 3px 10px; border-radius: 20px; font-size: 10px; color: var(--text2); }
+
+/* Loading */
+.thinking {
+  display: flex; align-items: center; gap: 8px;
+  padding: 14px 18px; background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 16px; align-self: flex-start; font-size: 13px; color: var(--text2);
+}
+.thinking .dots span {
+  animation: blink 1.4s infinite both;
+  font-size: 20px;
+}
+.thinking .dots span:nth-child(2) { animation-delay: 0.2s; }
+.thinking .dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%, 80%, 100% { opacity: 0.2; } 40% { opacity: 1; } }
+
+/* COMEX mode */
+.comex-responses { display: flex; flex-direction: column; gap: 16px; padding: 20px; }
+.comex-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+  padding: 20px; transition: border-color 0.3s;
+}
+.comex-card:hover { border-color: var(--accent); }
+.comex-card .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.comex-card .card-header .emoji { font-size: 28px; }
+.comex-card .card-header .name { font-size: 16px; font-weight: 700; }
+.comex-card .card-header .role { font-size: 11px; color: var(--text2); }
+.comex-card .card-body { font-size: 14px; line-height: 1.7; white-space: pre-wrap; }
